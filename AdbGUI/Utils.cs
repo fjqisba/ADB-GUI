@@ -10,31 +10,40 @@ namespace AdbGUI
 {
     internal class Utils
     {
-        private static readonly int defaultCodePage = CultureInfo.CurrentCulture.TextInfo.OEMCodePage;
-
-        static public string RunCmd(string command)
+        static public string ExecuteCmd(string fileName,string argument)
         {
             Process cli = new Process();
-            ProcessStartInfo startInfo = new ProcessStartInfo()
+            cli.StartInfo = new ProcessStartInfo()
             {
-                FileName = "cmd",
-                Arguments = "/K prompt $g ",
+                FileName = fileName,
+                Arguments = argument,
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 RedirectStandardInput = true,
-                StandardOutputEncoding = Encoding.GetEncoding(defaultCodePage),
-                StandardErrorEncoding = Encoding.GetEncoding(defaultCodePage)
             };
-
-            cli.EnableRaisingEvents = true;
-            cli.StartInfo = startInfo;
             cli.Start();
+            string result = cli.StandardOutput.ReadToEnd();
+            cli.WaitForExit();
+            return result;
+        }
 
-            
-
-            return cli.StandardOutput.ReadToEnd();
+        static public void CreateCmd(string fileName, string argument)
+        {
+            Process cli = new Process();
+            cli.StartInfo = new ProcessStartInfo()
+            {
+                FileName = fileName,
+                Arguments = argument,
+                UseShellExecute = true,
+                CreateNoWindow = false,
+                RedirectStandardOutput = false,
+                RedirectStandardError = false,
+                RedirectStandardInput = false,
+            };
+            cli.Start();
+            return;
         }
     }
 }

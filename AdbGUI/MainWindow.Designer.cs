@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.deviceTree = new System.Windows.Forms.TreeView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.splitter2 = new System.Windows.Forms.Splitter();
@@ -42,19 +42,20 @@
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // treeView1
+            // deviceTree
             // 
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Location = new System.Drawing.Point(3, 26);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(359, 626);
-            this.treeView1.TabIndex = 0;
+            this.deviceTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.deviceTree.Location = new System.Drawing.Point(3, 26);
+            this.deviceTree.Name = "deviceTree";
+            this.deviceTree.Size = new System.Drawing.Size(359, 626);
+            this.deviceTree.TabIndex = 0;
+            this.deviceTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.deviceTree_AfterSelect);
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.groupBox1.Controls.Add(this.treeView1);
+            this.groupBox1.Controls.Add(this.deviceTree);
             this.groupBox1.Location = new System.Drawing.Point(24, 62);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(365, 655);
@@ -94,6 +95,7 @@
             this.textBox1.Location = new System.Drawing.Point(411, 76);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(790, 638);
             this.textBox1.TabIndex = 5;
             // 
@@ -112,7 +114,7 @@
             // 程序ToolStripMenuItem
             // 
             this.程序ToolStripMenuItem.Name = "程序ToolStripMenuItem";
-            this.程序ToolStripMenuItem.Size = new System.Drawing.Size(16, 20);
+            this.程序ToolStripMenuItem.Size = new System.Drawing.Size(16, 28);
             // 
             // 程序ToolStripMenuItem1
             // 
@@ -126,7 +128,7 @@
             // 刷新设备ToolStripMenuItem
             // 
             this.刷新设备ToolStripMenuItem.Name = "刷新设备ToolStripMenuItem";
-            this.刷新设备ToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.刷新设备ToolStripMenuItem.Size = new System.Drawing.Size(182, 34);
             this.刷新设备ToolStripMenuItem.Text = "刷新设备";
             this.刷新设备ToolStripMenuItem.Click += new System.EventHandler(this.刷新设备ToolStripMenuItem_Click);
             // 
@@ -145,6 +147,7 @@
             this.Name = "MainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ADB小助手";
+            this.Load += new System.EventHandler(this.MainWindow_Load);
             this.groupBox1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -155,7 +158,7 @@
 
         #endregion
 
-        private TreeView treeView1;
+        private TreeView deviceTree;
         private GroupBox groupBox1;
         private Splitter splitter1;
         private Splitter splitter2;
